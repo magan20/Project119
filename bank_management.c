@@ -3,18 +3,18 @@
 #include<string.h>
 #include<stdlib.h>
 
-int global_temp=-1;	//ÀÓ½Ã Àü¿ªº¯¼ö
-int cnt = 0;	// »ı¼ºµÈ °èÁ¤ °¹¼ö
-char name[50][50];	//ÀÌ¸§
-int birth[50];		//»ı³â¿ùÀÏ
-char pers_num[50][50];	//ÁÖ¹Îµî·Ï¹øÈ£
-char address[50][50];	//ÁÖ¼Ò
-char phone[50][50];	//ÀüÈ­¹øÈ£
-int acnt_pw[50];	//°èÁÂ ºñ¹Ğ¹øÈ£
-long long money[50];	//ÅëÀå ÀÜ°í
-long long money_loan[50];	//´ëÃâ³»¿ª
+int global_temp=-1;	 //ì„ì‹œ ì „ì—­ë³€ìˆ˜
+int cnt = 0;	// ìƒì„±ëœ ê³„ì • ê°¯ìˆ˜
+char name[50][50];	//ì´ë¦„
+int birth[50];		//ìƒë…„ì›”ì¼
+char pers_num[50][50];	//ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸
+char address[50][50];	//ì£¼ì†Œ
+char phone[50][50];	//ì „í™”ë²ˆí˜¸
+int acnt_pw[50];	//ê³„ì¢Œ ë¹„ë°€ë²ˆí˜¸
+long long money[50];	//í†µì¥ ì”ê³ 
+long long money_loan[50];	//ëŒ€ì¶œë‚´ì—­
 
-int new_account(void)	// 1. °èÁÂ »ı¼º ÇÔ¼ö
+int new_account(void)	// 1. ê³„ì¢Œ ìƒì„± í•¨ìˆ˜
 {
 	console();
 	int choice_acnt;
@@ -30,7 +30,7 @@ input:
 	scanf_s("%d", &choice_acnt);
 	switch (choice_acnt) {
 	case 1:
-		Saving_acnt();		//°èÁÂ»ı¼º ÇÔ¼ö·Î ÀÌµ¿
+		Saving_acnt();		//ê³„ì¢Œìƒì„± í•¨ìˆ˜ë¡œ ì´ë™
 		break;
 	case 2:
 		main();
@@ -43,40 +43,40 @@ input:
 }
 
 
-int Saving_acnt()	//1_1. ¿¹±İ°èÁÂ »ı¼º ÇÔ¼ö
+int Saving_acnt()	//1_1. ì˜ˆê¸ˆê³„ì¢Œ ìƒì„± í•¨ìˆ˜
 {
-	console();	// ÄÜ¼ÖÃ¢ ¾÷µ¥ÀÌÆ® ¹× »ö»óº¯°æ
+	console();	// ì½˜ì†”ì°½ ì—…ë°ì´íŠ¸ ë° ìƒ‰ìƒë³€ê²½
 	printf("\n\n\n\n");
-	printf("\t\t\t\t1. Name: ");	//ÀÌ¸§ ÀÔ·Â
-	while ((getchar() != '\n'));	//°³Çà¹®ÀÚ ¹«½ÃÇÏ°í fgets½ÇÇà
-	fgets(name[cnt], 50, stdin);	//name[cnt][]¿¡ ÀÔ·Â°ª ÀÔ·Â
-	printf("\t\t\t\t%s\n", name[cnt]);	//ÀÔ·Â°ª(name[cnt] Ãâ·Â)
+	printf("\t\t\t\t1. Name: ");	//ì´ë¦„ ì…ë ¥
+	while ((getchar() != '\n'));	//ê°œí–‰ë¬¸ì ë¬´ì‹œí•˜ê³  fgetsì‹¤í–‰
+	fgets(name[cnt], 50, stdin);	//name[cnt][]ì— ì…ë ¥ê°’ ì…ë ¥
+	printf("\t\t\t\t%s\n", name[cnt]);	//ì…ë ¥ê°’(name[cnt] ì¶œë ¥)
 
-	printf("\t\t\t\t2. Birthday[YYMMDD]: ");	//»ı³â¿ùÀÏ ÀÔ·Â
+	printf("\t\t\t\t2. Birthday[YYMMDD]: ");	//ìƒë…„ì›”ì¼ ì…ë ¥
 	scanf_s("%d", &birth[cnt]);
 	printf("\t\t\t\t%06d\n\n", birth[cnt]);
 
-	printf("\t\t\t\t3. Personal Number[0000000000000]: ");	//ÁÖ¹Îµî·Ï¹øÈ£ ÀÔ·Â, Á¤¼ö´Â ¹üÀ§°¡ ³Ê¹« Ä¿¼­ ÀÔ·Â°ªÀ» ¹®ÀÚ¿­·Î ¹ŞÀ½
+	printf("\t\t\t\t3. Personal Number[0000000000000]: ");	//ì£¼ë¯¼ë“±ë¡ë²ˆí˜¸ ì…ë ¥, ì •ìˆ˜ëŠ” ë²”ìœ„ê°€ ë„ˆë¬´ ì»¤ì„œ ì…ë ¥ê°’ì„ ë¬¸ìì—´ë¡œ ë°›ìŒ
 	while (getchar() != '\n');
 	fgets(pers_num[cnt], 50, stdin);
-	//scanf_s("%d", &pers_num[cnt]);	//Á¤¼ö·Î ¹Ş¾ÒÀ» ¶§
+	//scanf_s("%d", &pers_num[cnt]);	//ì •ìˆ˜ë¡œ ë°›ì•˜ì„ ë•Œ
 	printf("\t\t\t\t%013s\n\n", pers_num[cnt]);
 
-	printf("\t\t\t\t4. Address: ");	//ÁÖ¼Ò ÀÔ·Â
+	printf("\t\t\t\t4. Address: ");	//ì£¼ì†Œ ì…ë ¥
 	fgets(address[cnt], 50, stdin);
 	printf("\t\t\t\t%s\n", address[cnt]);
 
-	printf("\t\t\t\t5. Phone Number: ");	//ÀüÈ­¹øÈ£ ÀÔ·Â, Á¤¼ö´Â ¹üÀ§°¡ ³Ê¹« Ä¿¼­ ÀÔ·Â°ªÀ» ¹®ÀÚ¿­·Î ¹ŞÀ½
+	printf("\t\t\t\t5. Phone Number: ");	//ì „í™”ë²ˆí˜¸ ì…ë ¥, ì •ìˆ˜ëŠ” ë²”ìœ„ê°€ ë„ˆë¬´ ì»¤ì„œ ì…ë ¥ê°’ì„ ë¬¸ìì—´ë¡œ ë°›ìŒ
 	fgets(phone[cnt], 50, stdin);
 	//scanf_s("%s", &phone[cnt]);
 	printf("\t\t\t\t%011s\n\n", phone[cnt]);
 
-	printf("\t\t\t\t6. Account Password[000000]: ");	//°èÁÂ ºñ¹Ğ¹øÈ£ »ı¼º
+	printf("\t\t\t\t6. Account Password[000000]: ");	//ê³„ì¢Œ ë¹„ë°€ë²ˆí˜¸ ìƒì„±
 	scanf_s("%d", &acnt_pw[cnt]);
 	printf("\t\t\t\t%06d\n\n", acnt_pw[cnt]);
 
-	money[cnt] = 0;	//ÅëÀÜ ÀÜ°í 0À¸·Î ¼³Á¤
-	money_loan[cnt] = 0; //´ëÃâ ³»¿ª 0À¸·Î ¼³Á¤
+	money[cnt] = 0;	//í†µì” ì”ê³  0ìœ¼ë¡œ ì„¤ì •
+	money_loan[cnt] = 0; //ëŒ€ì¶œ ë‚´ì—­ 0ìœ¼ë¡œ ì„¤ì •
 	cnt += 1;
 	//Sleep(2000);
 
@@ -92,7 +92,7 @@ int Saving_acnt()	//1_1. ¿¹±İ°èÁÂ »ı¼º ÇÔ¼ö
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 
-int update_user(void)	//2. Á¤º¸ ¾÷µ¥ÀÌÆ® ÇÔ¼ö
+int update_user(void)	//2. ì •ë³´ ì—…ë°ì´íŠ¸ í•¨ìˆ˜
 {
 	char edit_answer;
 	char again_answer;
@@ -110,8 +110,8 @@ int update_user(void)	//2. Á¤º¸ ¾÷µ¥ÀÌÆ® ÇÔ¼ö
 	while ((getchar()) != '\n');
 	fgets(name_input, 50, stdin);
 
-	for (i = 0; i < cnt; i++) {		// name¿¡ µé¾îÀÖ´Â ¹®ÀÚ¿­ ÁıÇÕ°ú ÀÔ·Â ¹ŞÀº ¹®ÀÚ¿­ Áß ÀÏÄ¡ÇÏ´Â °ÍÀÌ ÀÖ´ÂÁö È®ÀÎ ÈÄ ÀÏÄ¡ÇÏ´Â name¹®ÀÚ¿­ÀÇ ÀúÀåµÈ ¹øÈ£ ÀúÀå
-		compare = strcmp(name[i], name_input);	//µÎ°³ ¹®ÀÚ¿­ ºñ±³
+	for (i = 0; i < cnt; i++) {		// nameì— ë“¤ì–´ìˆëŠ” ë¬¸ìì—´ ì§‘í•©ê³¼ ì…ë ¥ ë°›ì€ ë¬¸ìì—´ ì¤‘ ì¼ì¹˜í•˜ëŠ” ê²ƒì´ ìˆëŠ”ì§€ í™•ì¸ í›„ ì¼ì¹˜í•˜ëŠ” nameë¬¸ìì—´ì˜ ì €ì¥ëœ ë²ˆí˜¸ ì €ì¥
+		compare = strcmp(name[i], name_input);	//ë‘ê°œ ë¬¸ìì—´ ë¹„êµ
 		if (compare == 0) {
 			temp = 0;
 			global_temp = i;
@@ -119,7 +119,7 @@ int update_user(void)	//2. Á¤º¸ ¾÷µ¥ÀÌÆ® ÇÔ¼ö
 	}
 	
 	if (cnt == 0) {		
-		console();		// °èÁÂ°¡ ÀÖ´ÂÁö °ËÁõÇÏ´Â ÇÔ¼ö. cnt°¡ 0 ÀÌ¸é main()À¸·Î µ¹¾Æ°¨,
+		console();		// ê³„ì¢Œê°€ ìˆëŠ”ì§€ ê²€ì¦í•˜ëŠ” í•¨ìˆ˜. cntê°€ 0 ì´ë©´ main()ìœ¼ë¡œ ëŒì•„ê°,
 		printf("\n\n\n\n\n");
 		printf("\t\t\t\t\t\tNo Account");
 		Sleep(1000);
@@ -132,10 +132,10 @@ int update_user(void)	//2. Á¤º¸ ¾÷µ¥ÀÌÆ® ÇÔ¼ö
 		if (temp == 0) {
 			printf("\n\n");
 			printf("\t\t\t============================================================\n");
-			printf("\t\t\t\t\t\t°èÁ¤ Á¤º¸ Ãâ·Â\n");
+			printf("\t\t\t\t\t\tê³„ì • ì •ë³´ ì¶œë ¥\n");
 			printf("\t\t\t============================================================\n");
 			printf("\n\n\n");
-			printf("\t\t\t\t\t1. Name: %s\n", name[global_temp]);	//global_temp´Â Àü¿ªº¯¼ö, ³ªÁß¿¡ ¾Æ·¡¿¡ ÀÖ´Â edit_acnt()ÇÔ¼ö¿¡¼­ ´Ù½Ã ¾²ÀÓ
+			printf("\t\t\t\t\t1. Name: %s\n", name[global_temp]);	//global_tempëŠ” ì „ì—­ë³€ìˆ˜, ë‚˜ì¤‘ì— ì•„ë˜ì— ìˆëŠ” edit_acnt()í•¨ìˆ˜ì—ì„œ ë‹¤ì‹œ ì“°ì„
 			printf("\t\t\t\t\t2. Birthday: %06d\n\n", birth[global_temp]);
 			printf("\t\t\t\t\t3. Personal Number: %013s\n", pers_num[global_temp]);
 			printf("\t\t\t\t\t4. Address: %s\n", address[global_temp]);
@@ -150,10 +150,10 @@ int update_user(void)	//2. Á¤º¸ ¾÷µ¥ÀÌÆ® ÇÔ¼ö
 
 			scanf("%c", &edit_answer);
 			if (edit_answer == 'y') {
-				edit_acnt();//Á¤º¸ ¼öÁ¤ÇÏ´Â ÇÔ¼ö °¡Á®¿À±â
+				edit_acnt();//ì •ë³´ ìˆ˜ì •í•˜ëŠ” í•¨ìˆ˜ ê°€ì ¸ì˜¤ê¸°
 			}
 			else {
-				return main();	//Á¤º¸ ¼öÁ¤À» ¾ÈÇÏ¸é ¸ŞÀÎÈ­¸éÀ¸·Î µ¹¾Æ°¡±â
+				return main();	//ì •ë³´ ìˆ˜ì •ì„ ì•ˆí•˜ë©´ ë©”ì¸í™”ë©´ìœ¼ë¡œ ëŒì•„ê°€ê¸°
 			}
 		}
 		else {
@@ -179,7 +179,7 @@ int update_user(void)	//2. Á¤º¸ ¾÷µ¥ÀÌÆ® ÇÔ¼ö
 	return 0;
 }
 
-int edit_acnt()	//2_1. °èÁ¤ ¼öÁ¤ ÇÔ¼ö 
+int edit_acnt()	//2_1. ê³„ì • ìˆ˜ì • í•¨ìˆ˜ 
 {
 	console();
 	char edit_address[50];
@@ -208,7 +208,7 @@ int edit_acnt()	//2_1. °èÁ¤ ¼öÁ¤ ÇÔ¼ö
 	return 0;
 }
 
-int translate()	//3. Ãâ±İ- °èÁÂ ¼±ÅÃ ¹æ¹ı °áÁ¤
+int translate()	//3. ì¶œê¸ˆ- ê³„ì¢Œ ì„ íƒ ë°©ë²• ê²°ì •
 {
 	int method;
 	console();
@@ -237,7 +237,7 @@ int translate()	//3. Ãâ±İ- °èÁÂ ¼±ÅÃ ¹æ¹ı °áÁ¤
 	return 0;
 }
 
-int input_name(void)	//3_1. °èÁÂ È£Ãâ ¹æ¹ı Áß ÀÌ¸§ ÀÔ·ÂÇÏ´Â ÇÔ¼ö
+int input_name(void)	//3_1. ê³„ì¢Œ í˜¸ì¶œ ë°©ë²• ì¤‘ ì´ë¦„ ì…ë ¥í•˜ëŠ” í•¨ìˆ˜
 {
 	int work_choice;
 	char again_answer;
@@ -255,8 +255,8 @@ int input_name(void)	//3_1. °èÁÂ È£Ãâ ¹æ¹ı Áß ÀÌ¸§ ÀÔ·ÂÇÏ´Â ÇÔ¼ö
 	while ((getchar()) != '\n');
 	fgets(name_input, 50, stdin);
 
-	for (i = 0; i < cnt; i++) {		// name¿¡ µé¾îÀÖ´Â ¹®ÀÚ¿­ ÁıÇÕ°ú ÀÔ·Â ¹ŞÀº ¹®ÀÚ¿­ Áß ÀÏÄ¡ÇÏ´Â °ÍÀÌ ÀÖ´ÂÁö È®ÀÎ ÈÄ ÀÏÄ¡ÇÏ´Â name¹®ÀÚ¿­ÀÇ ÀúÀåµÈ ¹øÈ£ ÀúÀå
-		compare = strcmp(name[i], name_input);	//µÎ°³ ¹®ÀÚ¿­ ºñ±³
+	for (i = 0; i < cnt; i++) {		// nameì— ë“¤ì–´ìˆëŠ” ë¬¸ìì—´ ì§‘í•©ê³¼ ì…ë ¥ ë°›ì€ ë¬¸ìì—´ ì¤‘ ì¼ì¹˜í•˜ëŠ” ê²ƒì´ ìˆëŠ”ì§€ í™•ì¸ í›„ ì¼ì¹˜í•˜ëŠ” nameë¬¸ìì—´ì˜ ì €ì¥ëœ ë²ˆí˜¸ ì €ì¥
+		compare = strcmp(name[i], name_input);	//ë‘ê°œ ë¬¸ìì—´ ë¹„êµ
 		if (compare == 0) {
 			temp = 0;
 			global_temp = i;
@@ -264,7 +264,7 @@ int input_name(void)	//3_1. °èÁÂ È£Ãâ ¹æ¹ı Áß ÀÌ¸§ ÀÔ·ÂÇÏ´Â ÇÔ¼ö
 	}
 
 	if (cnt == 0) {
-		console();		// °èÁÂ°¡ ÀÖ´ÂÁö °ËÁõÇÏ´Â ÇÔ¼ö. cnt°¡ 0 ÀÌ¸é main()À¸·Î µ¹¾Æ°¨,
+		console();		// ê³„ì¢Œê°€ ìˆëŠ”ì§€ ê²€ì¦í•˜ëŠ” í•¨ìˆ˜. cntê°€ 0 ì´ë©´ main()ìœ¼ë¡œ ëŒì•„ê°,
 		printf("\n\n\n\n\n");
 		printf("\t\t\t\t\t\tNo Account");
 		Sleep(1000);
@@ -291,7 +291,7 @@ int input_name(void)	//3_1. °èÁÂ È£Ãâ ¹æ¹ı Áß ÀÌ¸§ ÀÔ·ÂÇÏ´Â ÇÔ¼ö
 				withdraw();
 			}
 			else if(work_choice == 2) {
-				deposit();//¿¹±İÇÏ´Â ÇÔ¼ö °¡Á®¿À±â // ÇÔ¼ö »ç¿ë ÈÄ Àü¿ªº¯¼ö global_temp¸¦ -1·Î ÃÊ±âÈ­
+				deposit();//ì˜ˆê¸ˆí•˜ëŠ” í•¨ìˆ˜ ê°€ì ¸ì˜¤ê¸° // í•¨ìˆ˜ ì‚¬ìš© í›„ ì „ì—­ë³€ìˆ˜ global_tempë¥¼ -1ë¡œ ì´ˆê¸°í™”
 			}
 			else if (work_choice == 3) {
 				main();
@@ -323,7 +323,7 @@ int input_name(void)	//3_1. °èÁÂ È£Ãâ ¹æ¹ı Áß ÀÌ¸§ ÀÔ·ÂÇÏ´Â ÇÔ¼ö
 	return 0;
 }
 
-int user_list()		//3_2. °èÁÂ È£Ãâ ¹æ¹ı Áß ¸®½ºÆ® ¼±ÅÃ
+int user_list()		//3_2. ê³„ì¢Œ í˜¸ì¶œ ë°©ë²• ì¤‘ ë¦¬ìŠ¤íŠ¸ ì„ íƒ
 {
 	int work_choice;
 	int temp;
@@ -337,7 +337,7 @@ int user_list()		//3_2. °èÁÂ È£Ãâ ¹æ¹ı Áß ¸®½ºÆ® ¼±ÅÃ
 	printf("\t\t\t\tAccount List");
 	printf("\n\n\n\n\n");
 
-	for (i = 0; i < cnt; i++) {	//ÀÌ¸§, ÁÖ¹Î¹øÈ£, ÁÖ¼Ò, ÀüÈ­¹øÈ£
+	for (i = 0; i < cnt; i++) {	//ì´ë¦„, ì£¼ë¯¼ë²ˆí˜¸, ì£¼ì†Œ, ì „í™”ë²ˆí˜¸
 		printf("\t\t\t\t%d. name: ", (i + 1)); printf("%s", name[i]);
 		printf("\t\t\t\t  personal_num: %s", pers_num[i]);
 		printf("\t\t\t\t  phone_num: %s\n", phone[i]);
@@ -375,10 +375,10 @@ int user_list()		//3_2. °èÁÂ È£Ãâ ¹æ¹ı Áß ¸®½ºÆ® ¼±ÅÃ
 
 		scanf_s("%d", &work_choice);
 		if (work_choice == 1) {
-			withdraw();		//Ãâ±İÇÏ´Â ÇÔ¼ö °¡Á®¿À±â
+			withdraw();		//ì¶œê¸ˆí•˜ëŠ” í•¨ìˆ˜ ê°€ì ¸ì˜¤ê¸°
 		}
 		else if (work_choice == 2) {
-			deposit();		//¿¹±İÇÏ´Â ÇÔ¼ö °¡Á®¿À±â // ÇÔ¼ö »ç¿ë ÈÄ Àü¿ªº¯¼ö global_temp¸¦ -1·Î ÃÊ±âÈ­
+			deposit();		//ì˜ˆê¸ˆí•˜ëŠ” í•¨ìˆ˜ ê°€ì ¸ì˜¤ê¸° // í•¨ìˆ˜ ì‚¬ìš© í›„ ì „ì—­ë³€ìˆ˜ global_tempë¥¼ -1ë¡œ ì´ˆê¸°í™”
 		}
 		else if (work_choice == 3) {
 			user_list();
@@ -390,7 +390,7 @@ int user_list()		//3_2. °èÁÂ È£Ãâ ¹æ¹ı Áß ¸®½ºÆ® ¼±ÅÃ
 	return 0;
 }
 
-int withdraw()		//°èÁ¤ ¼±ÅÃ, Ãâ±İ ¼±ÅÃ
+int withdraw()		//ê³„ì • ì„ íƒ, ì¶œê¸ˆ ì„ íƒ
 {
 	long long input_money = 0;
 	int yes_no_;
@@ -410,7 +410,7 @@ int withdraw()		//°èÁ¤ ¼±ÅÃ, Ãâ±İ ¼±ÅÃ
 	printf("\t\t\t\t->");
 	scanf_s("%d", &input_money);
 	if (input_money >= 0) {
-		if ((money[global_temp] - input_money) < 0) {		//ÀÔ·ÂÇÑ °ªÀÌ ÀÜ°íº¸´Ù ¸¹À» ‹š
+		if ((money[global_temp] - input_money) < 0) {		//ì…ë ¥í•œ ê°’ì´ ì”ê³ ë³´ë‹¤ ë§ì„ Â‹Âš
 			printf("\n\n\n\n\t\t\t\t\tNot enough money\n");
 			printf("\n\t\t\t\tYour bankbook balance: %d\n", money[global_temp]);
 			if(money_loan[global_temp] != 0) {
@@ -432,7 +432,7 @@ int withdraw()		//°èÁ¤ ¼±ÅÃ, Ãâ±İ ¼±ÅÃ
 				goto again;
 			}
 		}
-		else {	// ÀÔ·ÂÇÑ °ªÀÌ Ãâ±İÇÒ ¼ö ÀÖÀ»¸¸Å­ ¸¹À» ¶§
+		else {	// ì…ë ¥í•œ ê°’ì´ ì¶œê¸ˆí•  ìˆ˜ ìˆì„ë§Œí¼ ë§ì„ ë•Œ
 			console();
 			money[global_temp] -= input_money;
 			printf("\n\n\n\n");
@@ -469,7 +469,7 @@ int withdraw()		//°èÁ¤ ¼±ÅÃ, Ãâ±İ ¼±ÅÃ
 	return 0;
 }
 
-int deposit()	//3_0_2. ¿¹±İ ÇÔ¼ö
+int deposit()	//3_0_2. ì˜ˆê¸ˆ í•¨ìˆ˜
 {
 	long long input_money=0;
 	int more_work;
@@ -492,7 +492,7 @@ again:
 	scanf_s("%d", &input_money);
 
 	if (input_money >= 0) {
-		money[global_temp] += input_money;		// ÀÔ·ÂÇÑ ±İ¾×ÀÌ ¾ç¼öÀÌ¸é ÀÜ±İ Á¤º¸ ¾÷µ¥ÀÌÆ®
+		money[global_temp] += input_money;		// ì…ë ¥í•œ ê¸ˆì•¡ì´ ì–‘ìˆ˜ì´ë©´ ì”ê¸ˆ ì •ë³´ ì—…ë°ì´íŠ¸
 		console();
 		printf("\n\n\n\n");
 		printf("\t\t\t\t%d won was deposited!!\n", input_money);
@@ -526,7 +526,7 @@ again:
 	return 0;
 }
 
-int account_detail()	//4. °èÁÂ Á¤º¸ È®ÀÎ ÇÔ¼ö
+int account_detail()	//4. ê³„ì¢Œ ì •ë³´ í™•ì¸ í•¨ìˆ˜
 {
 	int choice_num=0;
 	int temp;
@@ -543,7 +543,7 @@ jump_1:
 	printf("\t\t\t\tAccount List");
 	printf("\n\n\n\n\n");
 
-	for (i = 0; i < cnt; i++) {	//ÀÌ¸§, ÁÖ¹Î¹øÈ£, ÁÖ¼Ò, ÀüÈ­¹øÈ£
+	for (i = 0; i < cnt; i++) {	//ì´ë¦„, ì£¼ë¯¼ë²ˆí˜¸, ì£¼ì†Œ, ì „í™”ë²ˆí˜¸
 		printf("\t\t\t\t%d. name: ", (i + 1)); printf("%s", name[i]);
 		printf("\t\t\t\t   personal_num: %s", pers_num[i]);
 		printf("\t\t\t\t   phone_num: %s", phone[i]);
@@ -571,7 +571,7 @@ jump_1:
 		console();
 		printf("\n\n");
 		printf("\t\t\t============================================================\n");
-		printf("\t\t\t\t\t\t°èÁ¤ Á¤º¸ Ãâ·Â\n");
+		printf("\t\t\t\t\t\tê³„ì • ì •ë³´ ì¶œë ¥\n");
 		printf("\t\t\t============================================================\n");
 		printf("\n\n\n");
 		printf("\t\t\t\t\t1. Name: %s\n", name[temp]);
@@ -601,7 +601,7 @@ jump_1:
 	return 0;
 }
 
-int erase_home()		// °èÁ¤ »èÁ¦ ÇÔ¼ö  
+int erase_home()		// ê³„ì • ì‚­ì œ í•¨ìˆ˜  
 {
 	int i;
 	int acnt_delete;
@@ -617,7 +617,7 @@ jump:
 	printf("\t\t\t============================================================\n");
 	printf("\n\n");	
 	
-	for (i = 0; i < cnt; i++) {	//ÀÌ¸§, ÁÖ¹Î¹øÈ£, ÁÖ¼Ò, ÀüÈ­¹øÈ£
+	for (i = 0; i < cnt; i++) {	//ì´ë¦„, ì£¼ë¯¼ë²ˆí˜¸, ì£¼ì†Œ, ì „í™”ë²ˆí˜¸
 		printf("\t\t\t\t%d. name: ", (i + 1)); printf("%s", name[i]);
 		printf("\t\t\t\t   personal_num: %s", pers_num[i]);
 		printf("\t\t\t\t   phone_num: %s\n", phone[i]);
@@ -648,7 +648,7 @@ jump:
 		console();
 		printf("\n\n");
 		printf("\t\t\t============================================================\n");
-		printf("\t\t\t\t\t\t°èÁ¤ Á¤º¸ Ãâ·Â\n");
+		printf("\t\t\t\t\t\tê³„ì • ì •ë³´ ì¶œë ¥\n");
 		printf("\t\t\t============================================================\n");
 		printf("\n\n\n");
 		printf("\t\t\t\t\t1. Name: %s\n", name[global_temp]);
@@ -680,7 +680,7 @@ jump:
 	return 0;
 }
 
-int account_delete() //ÀÌ¸§, »ı³â¿ùÀÏ, ÁÖ¹Îµé¿Á¹øÈ£, ÁÖ¼Ò, ÀüÈ­¹øÈ£, °èÁ¤ºñ¹ø, µ·, ´ëÃâ 
+int account_delete() //ì´ë¦„, ìƒë…„ì›”ì¼, ì£¼ë¯¼ë“¤ì˜¥ë²ˆí˜¸, ì£¼ì†Œ, ì „í™”ë²ˆí˜¸, ê³„ì •ë¹„ë²ˆ, ëˆ, ëŒ€ì¶œ 
 {
 	console();
 	int temp;
@@ -707,7 +707,7 @@ int account_delete() //ÀÌ¸§, »ı³â¿ùÀÏ, ÁÖ¹Îµé¿Á¹øÈ£, ÁÖ¼Ò, ÀüÈ­¹øÈ£, °èÁ¤ºñ¹ø, µ
 	return 0;
 }
 
-int loan_money_home()	//6¹ø ÀÌ½ºÅÍ¿¡±×. ´ëÃâ ±â´É
+int loan_money_home()	//6ë²ˆ ì´ìŠ¤í„°ì—ê·¸. ëŒ€ì¶œ ê¸°ëŠ¥
 {
 	console();
 	int work_choice;
@@ -775,7 +775,7 @@ jump_1:
 	printf("\t\t\t\tAccount List");
 	printf("\n\n\n\n\n");
 
-	for (i = 0; i < cnt; i++) {	//ÀÌ¸§, ÁÖ¹Î¹øÈ£, ÁÖ¼Ò, ÀüÈ­¹øÈ£
+	for (i = 0; i < cnt; i++) {	//ì´ë¦„, ì£¼ë¯¼ë²ˆí˜¸, ì£¼ì†Œ, ì „í™”ë²ˆí˜¸
 		printf("\t\t\t\t%d. name: ", (i + 1)); printf("%s", name[i]);
 		printf("\t\t\t\t   personal_num: %s", pers_num[i]);
 		printf("\t\t\t\t   phone_num: %s\n", phone[i]);
@@ -794,7 +794,7 @@ jump_1:
 	else if (choice_num == cnt + 1) {
 		main();
 	}
-	else {		 // ´ëÃâ¾ó¸¶ÇÒ°ÇÁö ¹°¾îÁ»
+	else {		 // ëŒ€ì¶œì–¼ë§ˆí• ê±´ì§€ ë¬¼ì–´ì¢€
 		goto jump_2;
 		again_2:
 		printf("\n\n\t\t\t\tEnter again");
@@ -820,9 +820,9 @@ jump_1:
 
 int console()
 {
-	system("cls");	//ÄÜ¼ÖÃ¢ ¾÷µ¥ÀÌÆ®
-	system("color 70");		//ÄÜ¼ÖÃ¢ ¹è°æÀ» °ËÁ¤»öÀ¸·Î, ±Û¾¾¸¦ ÆÄ¶û»öÀ¸·Î ÁöÁ¤
-	system("mode con: cols=110 lines=30"); //// ÄÜ¼ÖÃ¢ Å©±â °¡·Î ¼¼·Î 5:3À¸·Î Á¶Àı
+	system("cls");	//ì½˜ì†”ì°½ ì—…ë°ì´íŠ¸
+	system("color 70");		//ì½˜ì†”ì°½ ë°°ê²½ì„ ê²€ì •ìƒ‰ìœ¼ë¡œ, ê¸€ì”¨ë¥¼ íŒŒë‘ìƒ‰ìœ¼ë¡œ ì§€ì •
+	system("mode con: cols=110 lines=30"); //// ì½˜ì†”ì°½ í¬ê¸° ê°€ë¡œ ì„¸ë¡œ 5:3ìœ¼ë¡œ ì¡°ì ˆ
 }
 
 int main(void)
@@ -830,9 +830,9 @@ int main(void)
 	int choice=0;
 
 	system("cls");
-	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n");	//ÁÙ ¹Ù²Ş
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n");	//ì¤„ ë°”ê¿ˆ
 	printf("\t\t\t\t  BANKING MANAGEMENT SYSTEM");	
-	Sleep(1000);	//printf ÇÔ¼ö Ãâ·Â ÈÄ 1ÃÊ ´ë±â
+	Sleep(1000);	//printf í•¨ìˆ˜ ì¶œë ¥ í›„ 1ì´ˆ ëŒ€ê¸°
 
 	again:
 	console();
@@ -856,7 +856,7 @@ int main(void)
 	}
 	
 	if (cnt == 0) {
-		console();		// °èÁÂ°¡ ÀÖ´ÂÁö °ËÁõÇÏ´Â ÇÔ¼ö. cnt°¡ 0 ÀÌ¸é main()À¸·Î µ¹¾Æ°¨,
+		console();		// ê³„ì¢Œê°€ ìˆëŠ”ì§€ ê²€ì¦í•˜ëŠ” í•¨ìˆ˜. cntê°€ 0 ì´ë©´ main()ìœ¼ë¡œ ëŒì•„ê°,
 		printf("\n\n\n\n\n");
 		printf("\t\t\t\t\t\tNo Account\n");
 		printf("\t\t\t\t\t\tCreat account");
