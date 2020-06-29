@@ -11,21 +11,21 @@
 #define Snake_y 25
 
 int map[Map_y][Map_x];
-int key;	//Å°º¸µå ÀÔ·ÂÀ» ¹ŞÀ» ¶§ »ç¿ëÇÏ´Â º¯¼ö
-int cnt = 3;	//¹ì ¸öÅë ±æÀÌ
-int global_life = 4;	//»ı¸íÀÌ 0 µÆÀ» ¶§ ÇÁ·Î±×·¥À» ³¡³»±â À§ÇÑ º¯¼ö
-int score = 0;	//Á¡¼ö
+int key;	//í‚¤ë³´ë“œ ì…ë ¥ì„ ë°›ì„ ë•Œ ì‚¬ìš©í•˜ëŠ” ë³€ìˆ˜
+int cnt = 3;	//ë±€ ëª¸í†µ ê¸¸ì´
+int global_life = 4;	 //ìƒëª…ì´ 0 ëì„ ë•Œ í”„ë¡œê·¸ë¨ì„ ëë‚´ê¸° ìœ„í•œ ë³€ìˆ˜
+int score = 0;	//ì ìˆ˜
 
 typedef struct _location
 {
 	int x;
 	int y;
 }location;
-location food;	//À½½ÄÀÌ Ãâ·ÂµÉ À§Ä¡°¡ ÀúÀåµÇ´Â º¯¼ö
-location snake_head;	//¹ìÀÇ ¸Ó¸® À§Ä¡¸¦ ÀúÀå
-location snake_tail;	//¹ìÀÇ ²¿¸®ÀÇ À§Ä¡¸¦ ÀúÀå
-location body[25];	//¹ìÀÇ °¢ ¸öÅë ºÎºĞÀÇ À§Ä¡¸¦ ÀúÀåÇÏ´Â º¯¼ö
-location temp[25];	//body[][]º¯¼ö¸¦ ¾÷µ¥ÀÌÆ® ÇÒ ¶§ »ç¿ëÇÏ´Â ÀÓ½Ã ÀúÀå º¯¼ö
+location food;	//ìŒì‹ì´ ì¶œë ¥ë  ìœ„ì¹˜ê°€ ì €ì¥ë˜ëŠ” ë³€ìˆ˜
+location snake_head;	//ë±€ì˜ ë¨¸ë¦¬ ìœ„ì¹˜ë¥¼ ì €ì¥
+location snake_tail;	//ë±€ì˜ ê¼¬ë¦¬ì˜ ìœ„ì¹˜ë¥¼ ì €ì¥
+location body[25];	//ë±€ì˜ ê° ëª¸í†µ ë¶€ë¶„ì˜ ìœ„ì¹˜ë¥¼ ì €ì¥í•˜ëŠ” ë³€ìˆ˜
+location temp[25];	//body[][]ë³€ìˆ˜ë¥¼ ì—…ë°ì´íŠ¸ í•  ë•Œ ì‚¬ìš©í•˜ëŠ” ì„ì‹œ ì €ì¥ ë³€ìˆ˜
 
 typedef struct _direction
 {
@@ -34,35 +34,35 @@ typedef struct _direction
 	int left;
 	int right;
 }direction;
-direction snake_d[Snake_y][Snake_x];	//¹ìÀÇ °¢ ¸öÅëÀÌ ÀÌµ¿ÇÒ À§Ä¡¸¦ ÀúÀåÇÏ´Â º¯¼ö
-direction d;	//ÇöÀç ÀÌµ¿ À§Ä¡¸¦ ÀúÀåÇÏ´Â º¯¼ö
+direction snake_d[Snake_y][Snake_x];	//ë±€ì˜ ê° ëª¸í†µì´ ì´ë™í•  ìœ„ì¹˜ë¥¼ ì €ì¥í•˜ëŠ” ë³€ìˆ˜
+direction d;	//í˜„ì¬ ì´ë™ ìœ„ì¹˜ë¥¼ ì €ì¥í•˜ëŠ” ë³€ìˆ˜
 
 void Game_instructions();
 void Console();
 
-void Map_init();	//¸Ê ÃÊ±âÈ­ ÇÏ´Â ÇÔ¼ö
-void Map();		//¸Ê Ãâ·ÂÇÏ´Â ÇÔ¼ö
-void Score();	//Á¡¼ö Ãâ·ÂÇÏ´Â ÇÔ¼ö
-void Life();	//»ı¸í Ãâ·ÂÇÏ´Â ÇÔ¼ö
-void Food();	//À½½Ä Ãâ·ÂÇÏ´Â ÇÔ¼ö
-void Foodeat();	//À½½ÄÀ» ¸ÔÀ¸¸é Á¡¼ö°¡ ¿Ã¶ó°¡°í À½½ÄÀÌ ´Ù½Ã »ı¼ºµÊ
-void Die();	//º®ÀÌ³ª ÀÚ±â ÀÚ½ÅÇÑÅ× ´ê¾ÒÀ» ‹š »ı¸í ±ïÀÌ°í ´Ù½Ã °¡¿îµ¥·Î µ¹¾Æ°¡´Â ÇÔ¼ö
+void Map_init();	//ë§µ ì´ˆê¸°í™” í•˜ëŠ” í•¨ìˆ˜
+void Map();		//ë§µ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+void Score();	//ì ìˆ˜ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+void Life();	//ìƒëª… ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+void Food();	//ìŒì‹ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+void Foodeat();	//ìŒì‹ì„ ë¨¹ìœ¼ë©´ ì ìˆ˜ê°€ ì˜¬ë¼ê°€ê³  ìŒì‹ì´ ë‹¤ì‹œ ìƒì„±ë¨
+void Die();	//ë²½ì´ë‚˜ ìê¸° ìì‹ í•œí…Œ ë‹¿ì•˜ì„ Â‹Âš ìƒëª… ê¹ì´ê³  ë‹¤ì‹œ ê°€ìš´ë°ë¡œ ëŒì•„ê°€ëŠ” í•¨ìˆ˜
 
-void Up();	//ÇöÀç ÀÌµ¿ À§Ä¡¸¦ upÀ¸·Î ¼³Á¤
-void Down();	//ÇöÀç ÀÌµ¿ À§Ä¡¸¦ downÀ¸·Î ¼³Á¤
-void Left();	//ÇöÀç ÀÌµ¿ À§Ä¡¸¦ left·Î ¼³Á¤
-void Right();	//ÇöÀç ÀÌµ¿ À§Ä¡¸¦ right·Î ¼³Á¤
+void Up();	//í˜„ì¬ ì´ë™ ìœ„ì¹˜ë¥¼ upìœ¼ë¡œ ì„¤ì •
+void Down();	//í˜„ì¬ ì´ë™ ìœ„ì¹˜ë¥¼ downìœ¼ë¡œ ì„¤ì •
+void Left();	//í˜„ì¬ ì´ë™ ìœ„ì¹˜ë¥¼ leftë¡œ ì„¤ì •
+void Right();	//í˜„ì¬ ì´ë™ ìœ„ì¹˜ë¥¼ rightë¡œ ì„¤ì •
 
-void Snake_init();	//¹ì ÃÊ±âÈ­ ÇÏ´Â ÇÔ¼ö
-void Temp_init();	//¹ì ¸öÅë °¢ ºÎºĞÀÇ À§Ä¡¸¦ ÀúÀåÇÏ´Â º¯¼ö ¾÷µ¥ÀÌÆ®
-void Create(); //¹ì ¸Ó¸® »ı¼ºÇÏ´Â ÇÔ¼ö
-void Delete();	//¹ì ²¿¸® »èÁ¦ÇÏ´Â ÇÔ¼ö
-void Snake_plus();	//Á¡¼ö ¸ÔÀ» ¶§ ¸öÅë ´Ã¾î³ª°Ô ÇÏ´Â ÇÔ¼ö
-void Move();	//¹ì ¿òÁ÷ÀÌ°Ô ÇÏ´Â ÇÔ¼ö
+void Snake_init();	//ë±€ ì´ˆê¸°í™” í•˜ëŠ” í•¨ìˆ˜
+void Temp_init();	//ë±€ ëª¸í†µ ê° ë¶€ë¶„ì˜ ìœ„ì¹˜ë¥¼ ì €ì¥í•˜ëŠ” ë³€ìˆ˜ ì—…ë°ì´íŠ¸
+void Create(); //ë±€ ë¨¸ë¦¬ ìƒì„±í•˜ëŠ” í•¨ìˆ˜
+void Delete();	//ë±€ ê¼¬ë¦¬ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜
+void Snake_plus();	//ì ìˆ˜ ë¨¹ì„ ë•Œ ëª¸í†µ ëŠ˜ì–´ë‚˜ê²Œ í•˜ëŠ” í•¨ìˆ˜
+void Move();	//ë±€ ì›€ì§ì´ê²Œ í•˜ëŠ” í•¨ìˆ˜
 
-void gotoxy(int x, int y);	//¿øÇÏ´Â À§Ä¡¿¡ Ãâ·Â
-void Event();	//ÀÌ½ºÅÍ¿¡±×, È÷µç ¿£µù, ¹ìÀÇ ¸Ó¸®¿Í ²¿¸®°¡ ¸¸³ª¸é ½ÇÇà
-int main();	//¸ŞÀÎ ÇÔ¼ö
+void gotoxy(int x, int y);	//ì›í•˜ëŠ” ìœ„ì¹˜ì— ì¶œë ¥
+void Event();	//ì´ìŠ¤í„°ì—ê·¸, íˆë“  ì—”ë”©, ë±€ì˜ ë¨¸ë¦¬ì™€ ê¼¬ë¦¬ê°€ ë§Œë‚˜ë©´ ì‹¤í–‰
+int main();	//ë©”ì¸ í•¨ìˆ˜
 
 void Game_instructions()
 {
@@ -70,11 +70,11 @@ void Game_instructions()
 	printf("\n\n\n\n");
 	printf("\t\t\t\tGame instruction\n");
 	printf("\n\n\n");
-	printf("-> ¹æÇâÅ°¸¦ ´­·¯¼­ ¹ìÀ» ¿òÁ÷ÀÓ´Ï´Ù.\n\n");
-	printf("-> ¹ìÀÌ ¿òÁ÷ÀÏ ¼ö ÀÖ´Â Ã¢ ¾È¿¡¼­ À½½ÄÀÌ ·£´ıÀ¸·Î »ı¼ºµÉ °ÍÀÔ´Ï´Ù. ¹ìÀÌ À½½ÄÀ» ¸ÔÀ» ‹š¸¶´Ù ¹ìÀÇ ±æÀÌ°¡ ÇÑÄ­ ´Ã¾î³ª°í, Á¡¼ö°¡ 10Á¡ ¿À¸§´Ï´Ù.\n\n");
-	printf("-> »ı¸íÀº ÃÑ 3°³ ÀÔ´Ï´Ù. ¹ìÀÌ º®¿¡ ´ê°Å³ª ¹ìÀÇ ¸öÅë¿¡ ´êÀ¸¸é »ı¸íÀÌ ÇÏ³ª¾¿ ÁÙ¾îµì´Ï´Ù.\n\n");
-	printf("-> ¾Æ¹«Å°³ª ´­·¯¼­ °ÔÀÓÀ» µµÁß¿¡ ÀÏ½ÃÁ¤Áö ÇÒ ¼ö ÀÖ½À´Ï´Ù. ´Ù½Ã °ÔÀÓÀ» ÁøÇàÇÏ·Á¸é ¹æÇâÅ°¸¦ ´©¸£¸é µË´Ï´Ù.\n\n");
-	printf("-> ¸¸¾à ´ç½ÅÀÌ °ÔÀÓÀ» µµÁß¿¡ ³ª°¡°í ½Í´Ù¸é esc¸¦ ´©¸£¼¼¿ä\n\n");
+	printf("-> ë°©í–¥í‚¤ë¥¼ ëˆŒëŸ¬ì„œ ë±€ì„ ì›€ì§ì„ë‹ˆë‹¤.\n\n");
+	printf("-> ë±€ì´ ì›€ì§ì¼ ìˆ˜ ìˆëŠ” ì°½ ì•ˆì—ì„œ ìŒì‹ì´ ëœë¤ìœ¼ë¡œ ìƒì„±ë  ê²ƒì…ë‹ˆë‹¤. ë±€ì´ ìŒì‹ì„ ë¨¹ì„ Â‹Âšë§ˆë‹¤ ë±€ì˜ ê¸¸ì´ê°€ í•œì¹¸ ëŠ˜ì–´ë‚˜ê³ , ì ìˆ˜ê°€ 10ì  ì˜¤ë¦„ë‹ˆë‹¤.\n\n");
+	printf("-> ìƒëª…ì€ ì´ 3ê°œ ì…ë‹ˆë‹¤. ë±€ì´ ë²½ì— ë‹¿ê±°ë‚˜ ë±€ì˜ ëª¸í†µì— ë‹¿ìœ¼ë©´ ìƒëª…ì´ í•˜ë‚˜ì”© ì¤„ì–´ë“­ë‹ˆë‹¤.\n\n");
+	printf("-> ì•„ë¬´í‚¤ë‚˜ ëˆŒëŸ¬ì„œ ê²Œì„ì„ ë„ì¤‘ì— ì¼ì‹œì •ì§€ í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ê²Œì„ì„ ì§„í–‰í•˜ë ¤ë©´ ë°©í–¥í‚¤ë¥¼ ëˆ„ë¥´ë©´ ë©ë‹ˆë‹¤.\n\n");
+	printf("-> ë§Œì•½ ë‹¹ì‹ ì´ ê²Œì„ì„ ë„ì¤‘ì— ë‚˜ê°€ê³  ì‹¶ë‹¤ë©´ escë¥¼ ëˆ„ë¥´ì„¸ìš”\n\n");
 	printf("Press the key to play game...");
 	if (_getch()) {
 	}
@@ -86,7 +86,7 @@ void Console()
 	system("color 72");
 }
 
-void Map_init()	//map[][]ÃÊ±âÈ­ ÇÏ´Â ÇÔ¼ö
+void Map_init()	//map[][]ì´ˆê¸°í™” í•˜ëŠ” í•¨ìˆ˜
 {
 	int i;
 	int j;
@@ -102,7 +102,7 @@ void Map_init()	//map[][]ÃÊ±âÈ­ ÇÏ´Â ÇÔ¼ö
 	}
 }
 
-void Map()	//¸Ê Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void Map()	//ë§µ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 {
 	int i;
 	int j;
@@ -110,7 +110,7 @@ void Map()	//¸Ê Ãâ·ÂÇÏ´Â ÇÔ¼ö
 		for (j = 0; j < Map_x; j++) {
 			if (map[i][j] == 1) {
 				gotoxy(x_length - 2 + (j * 2), y_length - 1 + i);
-				printf("¡á");
+				printf("â– ");
 			}
 			else {
 				gotoxy(x_length - 2 + (j * 2), y_length - 1 + i);
@@ -124,7 +124,7 @@ void Map()	//¸Ê Ãâ·ÂÇÏ´Â ÇÔ¼ö
 	printf("Score: %d", score);
 }
 
-void Score()	//Á¡¼ö¸¦ À§ÂÊ¿¡ Ãâ·Â
+void Score()	//ì ìˆ˜ë¥¼ ìœ„ìª½ì— ì¶œë ¥
 {
 	score += 10;
 	gotoxy(x_length + 24, 3);
@@ -132,7 +132,7 @@ void Score()	//Á¡¼ö¸¦ À§ÂÊ¿¡ Ãâ·Â
 	printf("Score: %d", score);
 }
 
-void Life()		//»ı¸íÀ» À§ÂÊ¿¡ Ãâ·Â
+void Life()		//ìƒëª…ì„ ìœ„ìª½ì— ì¶œë ¥
 {
 	static int life = 4;
 	life -= 1;
@@ -147,7 +147,7 @@ void Food()
 	food.x = rand() % 45;
 	food.y = rand() % 23;
 	gotoxy(x_length + (food.x * 2), y_length + food.y);
-	printf("¡Ú");
+	printf("â˜…");
 }
 
 void Foodeat()
@@ -232,7 +232,7 @@ void Snake_init()
 
 	for (k = 0; k < cnt; k++) {
 		gotoxy(x_length + (snake_head.x - k) * 2, y_length + snake_head.y);
-		printf("¡á");
+		printf("â– ");
 		body[k].x = snake_head.x - k;
 		body[k].y = 11;
 		if (k == cnt - 1) {
@@ -250,32 +250,32 @@ void Temp_init()
 	}
 }
 
-void Create()	//¸Ç ¾ÕÀ¸·Î ¹ì ¸Ó¸® »ı¼ºÇÏ´Â ÇÔ¼ö
+void Create()	//ë§¨ ì•ìœ¼ë¡œ ë±€ ë¨¸ë¦¬ ìƒì„±í•˜ëŠ” í•¨ìˆ˜
 {
 	int i;
 	if (d.up == 1) {
 		snake_d[snake_head.y][snake_head.x].up = 1;
 		snake_head.y -= 1;
 		gotoxy(x_length + (snake_head.x) * 2, y_length + snake_head.y);
-		printf("¡á");
+		printf("â– ");
 	}
 	else if (d.down == 1) {
 		snake_d[snake_head.y][snake_head.x].down = 1;
 		snake_head.y += 1;
 		gotoxy(x_length + (snake_head.x) * 2, y_length + snake_head.y);
-		printf("¡á");
+		printf("â– ");
 	}
 	else if (d.left == 1) {
 		snake_d[snake_head.y][snake_head.x].left = 1;
 		snake_head.x -= 1;
 		gotoxy(x_length + (snake_head.x) * 2, y_length + snake_head.y);
-		printf("¡á");
+		printf("â– ");
 	}
 	else if (d.right == 1) {
 		snake_d[snake_head.y][snake_head.x].right = 1;
 		snake_head.x += 1;
 		gotoxy(x_length + (snake_head.x) * 2, y_length + snake_head.y);
-		printf("¡á");
+		printf("â– ");
 	}
 	Temp_init();
 	for (i = 0; i < cnt; i++) {
@@ -288,7 +288,7 @@ void Create()	//¸Ç ¾ÕÀ¸·Î ¹ì ¸Ó¸® »ı¼ºÇÏ´Â ÇÔ¼ö
 	body[0].y = snake_head.y;
 }
 
-void Delete()	//¸ÇµÚ¿¡ ÀÖ´Â ¹ì ²¿¸® »èÁ¦ÇÏ´Â ÇÔ¼ö
+void Delete()	//ë§¨ë’¤ì— ìˆëŠ” ë±€ ê¼¬ë¦¬ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜
 {
 	if (snake_d[snake_tail.y][snake_tail.x].up == 1) {
 		snake_d[snake_tail.y][snake_tail.x].up = 0;
@@ -338,7 +338,7 @@ void Move()
 	}
 }
 
-void gotoxy(int x, int y)	//¿øÇÏ´Â À§Ä¡¿¡ Ãâ·Â
+void gotoxy(int x, int y)	//ì›í•˜ëŠ” ìœ„ì¹˜ì— ì¶œë ¥
 {
 	COORD Pos = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
@@ -356,7 +356,7 @@ void Event()
 	for (i = 0; i < Map_y; i++) {
 		for (j = 0; j < Map_x; j++) {
 			gotoxy(x_length - 2 + (j * 2), y_length - 1 + i);
-			printf("¡á");
+			printf("â– ");
 			Sleep(1);
 		}
 	}
